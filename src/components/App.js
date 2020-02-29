@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import UserDocument from './components/UserDocument'
+import UserDocument from './UserDocument';
+import Routes from '../routes';
+
+import { Link } from 'react-router-dom';
 
 export default class App extends Component {
   constructor() {
@@ -16,8 +19,13 @@ export default class App extends Component {
   }
 
   render() {
-    return <div class="App">
-      <UserDocument></UserDocument>
-    </div>
+    return (
+      <div class="App">
+        <Link to="/add">Add</Link>
+        <Link to="/resume">Resume</Link>
+
+        <Routes />
+      </div>
+    );
   }
 }
