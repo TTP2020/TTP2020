@@ -1,10 +1,10 @@
-const Sequelize = require("sequelize");
-const db = require("../index");
+const Sequelize = require('sequelize');
+const db = require('../index');
 
-const Resume = db.define("resume", {
+const Resume = db.define('resume', {
   file: {
-    type: Sequelize.BLOB("tiny")
-  }
+    type: Sequelize.BLOB,
+  },
 });
 
 module.exports = Resume;
