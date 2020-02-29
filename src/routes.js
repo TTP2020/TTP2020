@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter, Switch, Route } from 'react-router-dom';
 import UserDocument from './components/UserDocument';
-import Landing from './components/Landing/Landing'
+import Landing from './components/Landing/Landing';
 import Test from './components/Test';
-import Comments from './components/Comments';
+import CommentList from './components/CommentList';
 
 class Routes extends Component {
   render() {
@@ -11,7 +11,7 @@ class Routes extends Component {
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route exact path="/resume" component={UserDocument} />
-        <Route exact path="/comments" component={Comments} />
+        <Route exact path="/comments" component={CommentList} />
 
         {/* default route <Route component={LandingPage} /> */}
       </Switch>

@@ -4,17 +4,34 @@ import { Link } from "react-router-dom";
 import MockDocument from "../MockDocument/MockDocument";
 import "./Landing.css";
 
+
 export default class Landing extends Component {
   constructor() {
     super();
     this.state = {
       // documents: [{}, {}, {}, {}, {}],
       documents: [
-        { fileName: "example.pdf", title: "Frontend Dev" },
-        { fileName: "example2.pdf", title: "Roast me plz" },
-        { fileName: "example3.pdf", title: "Software Eng" },
-        { fileName: "example4.pdf", title: "Data Scientist" }
-      ]
+        { fileName: 'example.pdf', title: 'Frontend Dev', type: 'resume' },
+        { fileName: 'example2.pdf', title: 'Roast me plz', type: 'resume' },
+        { fileName: 'example3.pdf', title: 'Software Eng', type: 'resume' },
+        { fileName: 'example4.pdf', title: 'Data Scientist', type: 'resume' },
+        {
+          fileName: 'example5.pdf',
+          title: 'Cover Letter',
+          type: 'coverLetter',
+        },
+        {
+          fileName: 'example6.pdf',
+          title: 'Another Cover Letter',
+          type: 'coverLetter',
+        },
+        { fileName: 'example7.pdf', title: 'Reach out', type: 'outreach' },
+        {
+          fileName: 'example8.pdf',
+          title: 'LinkedIn Outreach Message',
+          type: 'outreach',
+        },
+      ],
     };
   }
 
@@ -37,10 +54,10 @@ export default class Landing extends Component {
             return (
               <Link
                 to={{
-                  pathname: "/resume",
+                  pathname: '/resume',
                   state: {
-                    fileName: document.fileName
-                  }
+                    fileName: document.fileName,
+                  },
                 }}
               >
                 <MockDocument title={document.title}></MockDocument>
