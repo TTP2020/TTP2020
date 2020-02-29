@@ -9,3 +9,8 @@ We created a platform for users to upload their resumes, cover letters, and outr
 3. Run script 'npm run seed'.
 4. Run script 'npm run start' and the app should open in a browser.
 
+## Authors
+* Alexander Mok
+* Billy Tan
+* Tristan Watanabe
+* Wilson Leung
