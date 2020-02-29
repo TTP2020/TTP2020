@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { Page } from 'react-pdf';
-import { Document } from 'react-pdf/dist/entry.webpack';
-import { ReactComponent as Comment } from '../assets/comment.svg';
-import { Button, Popup, Modal, Form } from 'semantic-ui-react';
-import AddCommentForm from './AddCommentForm';
+import React, { Component } from "react";
+import { Page } from "react-pdf";
+import { Document } from "react-pdf/dist/entry.webpack";
+import { ReactComponent as Comment } from "../assets/comment.svg";
+import { Button, Popup, Modal, Form } from "semantic-ui-react";
+import AddCommentForm from "./AddCommentForm";
 export default class UserDocument extends Component {
   constructor() {
     super();
@@ -86,12 +86,12 @@ export default class UserDocument extends Component {
             <Comment
               key={`${x}${y}`}
               style={{
-                width: '1%',
-                height: 'auto',
-                position: 'absolute',
-                color: 'red',
-                top: y - 15 + 'px',
-                left: x + 'px',
+                width: "1%",
+                height: "auto",
+                position: "absolute",
+                color: "red",
+                top: y - 15 + "px",
+                left: x + "px",
                 zIndex: 1
               }}
             ></Comment>
@@ -100,15 +100,19 @@ export default class UserDocument extends Component {
           );
         })}
         <nav>
-          <Button onClick={this.goToPrevPage}>Prev</Button>
-          <Button onClick={this.goToNextPage}>Next</Button>
+          {this.state.numPages > 1 ? (
+            <div>
+              <Button onClick={this.goToPrevPage}>Prev</Button>
+              <Button onClick={this.goToNextPage}>Next</Button>
+            </div>
+          ) : null}
           <p>
             Page {pageNumber} of {numPages}
           </p>
         </nav>
         <Document
           onClick={event => this.handleClick(event.pageX, event.pageY)}
-          file="./example.pdf"
+          file={`./${this.props.location.state.fileName}`}
           onLoadSuccess={this.onDocumentLoadSuccess}
         >
           <Page pageNumber={pageNumber}></Page>
