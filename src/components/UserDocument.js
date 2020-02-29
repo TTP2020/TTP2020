@@ -5,6 +5,7 @@ import { ReactComponent as Comment } from '../assets/comment.svg';
 import { Button, Popup, Modal, Form } from 'semantic-ui-react';
 import CommentComponent from './Comments';
 import AddCommentForm from './AddCommentForm';
+import CommentList from './CommentList';
 import axios from 'axios';
 const colors = [
   'red',
@@ -26,7 +27,8 @@ export default class UserDocument extends Component {
       open: false,
       x: null,
       y: null,
-      pointer: 0
+      pointer: 0,
+      allComments: []
     };
     this.createComments = this.createComments.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -34,32 +36,32 @@ export default class UserDocument extends Component {
   }
   async submitComment(event, color = false, x = null, y = null) {
     event.preventDefault();
+    const newX = x === null ? this.state.x : x;
+    const newY = y === null ? this.state.y : y;
     const newComment = {
       comment: event.target.comment.value,
       documentId: 1,
       color: color
         ? color
         : colors[Math.floor(this.state.pointer % colors.length)],
-      x: x === null ? this.state.x : x,
-      y: y === null ? this.state.y : y,
+      x: newX,
+      y: newY,
       pageNumber: this.state.pageNumber
     };
     await axios.post('/api/comments', newComment);
-    let key = `${this.state.x},${this.state.y}`;
-    this.setState(prevState => {
-      let updatedComments;
-      if (prevState.markers[key]) {
-        updatedComments = [...prevState.markers[key], newComment];
-      } else {
-        updatedComments = [newComment];
-      }
-      return {
-        markers: { ...prevState.markers, [key]: updatedComments },
-        x: null,
-        y: null,
-        open: false,
-        pointer: prevState.pointer + 1
-      };
+    let key = `${newX},${newY}`;
+    let updatedComments;
+    if (this.state.markers[key]) {
+      updatedComments = [...this.state.markers[key], newComment];
+    } else {
+      updatedComments = [newComment];
+    }
+    this.setState({
+      markers: { ...this.state.markers, [key]: updatedComments },
+      x: null,
+      y: null,
+      open: false,
+      pointer: this.state.pointer + 1
     });
   }
 
@@ -73,7 +75,7 @@ export default class UserDocument extends Component {
       if (!newMarkers[key]) newMarkers[key] = [];
       newMarkers[key].push(curr);
     }
-    this.setState({ markers: newMarkers });
+    this.setState({ markers: newMarkers, allComments: data });
     console.log(data);
   }
   closeModal() {
@@ -163,6 +165,9 @@ export default class UserDocument extends Component {
           open={this.state.open}
           submitComment={this.submitComment}
           closeModal={this.closeModal}
+        />
+        <CommentList
+          comments={this.state.allComments.sort((a, b) => a.color - b.color)}
         />
       </div>
     );
