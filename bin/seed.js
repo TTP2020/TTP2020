@@ -1,6 +1,6 @@
 const fs = require("fs");
-const db = require("../server/db");
-const { Comment } = require("../server/db/models");
+const db = require("../db");
+const { Comment } = require("../db/models");
 
 const comments = JSON.parse(fs.readFileSync("comments.json", "utf8"));
 

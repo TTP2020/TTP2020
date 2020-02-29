@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import { Document, Page, pdfjs } from 'react-pdf';
+import React, { Component } from "react";
+import { Document, Page, pdfjs } from "react-pdf";
 
-import AddCommentForm from './components/AddCommentForm';
+import AddCommentForm from "./components/AddCommentForm";
+import UploadResume from "./components/UploadResume";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -9,7 +10,7 @@ export default class App extends Component {
   state = {
     numPages: null,
     pageNumber: 1,
-    markers: [{}],
+    markers: [{}]
   };
 
   onDocumentLoadSuccess = ({ numPages }) => {
@@ -32,16 +33,16 @@ export default class App extends Component {
     return (
       <div>
         {markers.map(marker => {
-          console.log('rendered');
+          console.log("rendered");
           return (
             <div
               style={{
-                position: 'absolute',
+                position: "absolute",
 
-                color: 'red',
-                top: 100 + 'px',
-                left: 100 + 'px',
-                zIndex: 1,
+                color: "red",
+                top: 100 + "px",
+                left: 100 + "px",
+                zIndex: 1
               }}
             >
               ♥
@@ -65,6 +66,7 @@ export default class App extends Component {
         </Document>
 
         <AddCommentForm />
+        <UploadResume />
       </div>
     );
   }
