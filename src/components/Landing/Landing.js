@@ -24,7 +24,15 @@ export default class Landing extends Component {
     const { documents } = this.state;
     return (
       <div className="landing">
-        <Header as="h1" style={{ color: "white" }}>
+        <Header
+          as="h1"
+          style={{
+            color: "white",
+            "font-family": "Montserrat",
+            "font-weight": 800,
+            "font-size": "150px"
+          }}
+        >
           Welcome to Kritique
         </Header>
         <Header as="h2" style={{ color: "white" }}>

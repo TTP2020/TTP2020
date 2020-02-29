@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter, Switch, Route } from 'react-router-dom';
-
 import UserDocument from './components/UserDocument';
+import Landing from './components/Landing/Landing'
 import Test from './components/Test';
 import Comments from './components/Comments';
-import Landing from './components/Landing/Landing';
 
 class Routes extends Component {
   render() {
