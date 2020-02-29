@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import { Header, Container } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-import MockDocument from '../MockDocument/MockDocument';
-import './Landing.css';
+import React, { Component } from "react";
+import { Image } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import MockDocument from "../MockDocument/MockDocument";
+import "./Landing.css";
+
 
 export default class Landing extends Component {
   constructor() {
@@ -34,26 +35,20 @@ export default class Landing extends Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
   render() {
     const { documents } = this.state;
     return (
       <div className="landing">
-        <Header
-          as="h1"
-          style={{
-            color: 'white',
-            fontamily: 'Montserrat',
-            fontWeight: 800,
-            fontSize: '150px',
-          }}
-        >
-          Welcome to Kritique
-        </Header>
-        <Header as="h2" style={{ color: 'white' }}>
-          Pending Resumes
-        </Header>
+        <div>
+          <Image src="./logo.png" size="huge"></Image>
+        </div>
+        <div>
+          <h2 as="h2" style={{ color: "white" }}>
+            Pending Resumes
+        </h2>
+        </div>
         <div className="landing-documents">
           {documents.map(document => {
             return (

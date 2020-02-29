@@ -1,3 +1,16 @@
 .mockdocument {
+  background: lightslategrey;
+  width: 400px;
+  height: 200px;
+  margin: 10px;
+  margin-left: 20px;
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mockdocument-title {
   margin: 10px;
 }
