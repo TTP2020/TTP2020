@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Page } from 'react-pdf';
 import { Document } from 'react-pdf/dist/entry.webpack';
+import { ReactComponent as Comment } from './assets/comment.svg'
 
 export default class App extends Component {
   constructor() {
@@ -37,15 +38,17 @@ export default class App extends Component {
       <div>
         {markers.map(marker => {
           const { x, y } = marker
-          return <div style={{
+          return <Comment style={{
+            width: "1%",
+            height: "auto",
             position: "absolute",
             color: "red",
-            top: y + 'px',
+            top: y - 15 + 'px',
             left: x + 'px',
             zIndex: 1
           }}>
-            ♥
-          </div>
+
+          </Comment>
         })
         }
         <Document
