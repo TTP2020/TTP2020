@@ -1,9 +1,12 @@
-import React, { Component } from "react";
-import { Page } from "react-pdf";
-import { Document } from "react-pdf/dist/entry.webpack";
-import { ReactComponent as Comment } from "../assets/comment.svg";
-import { Button, Popup, Modal, Form } from "semantic-ui-react";
-import AddCommentForm from "./AddCommentForm";
+import React, { Component } from 'react';
+import { Page } from 'react-pdf';
+import { Document } from 'react-pdf/dist/entry.webpack';
+import { ReactComponent as Comment } from '../assets/comment.svg';
+import { Button, Popup, Modal, Form } from 'semantic-ui-react';
+import CommentComponent from './Comments';
+import AddCommentForm from './AddCommentForm';
+import axios from 'axios';
+
 export default class UserDocument extends Component {
   constructor() {
     super();
@@ -15,48 +18,43 @@ export default class UserDocument extends Component {
       x: null,
       y: null
     };
-    this.setComment = this.setComment.bind(this);
+
     this.closeModal = this.closeModal.bind(this);
+    this.submitComment = this.submitComment.bind(this);
   }
-  setComment() {
-    let newMarker = {
+  async submitComment(event) {
+    event.preventDefault();
+    const newComment = {
+      comment: event.target.comment.value,
+      documentId: 1,
+      color: 'red',
       x: this.state.x,
       y: this.state.y,
-      pageNumber: this.state.pageNumber,
-      comments: []
+      pageNumber: this.state.pageNumber
     };
+    await axios.post('/api/comments', newComment);
     let key = `${this.state.x}${this.state.y}`;
     this.setState(prevState => {
       return {
-        markers: { ...prevState.markers, [key]: newMarker },
+        markers: { ...prevState.markers, [key]: newComment },
         x: null,
         y: null,
         open: false
       };
     });
   }
-  componentDidMount() {
+
+  async componentDidMount() {
     //TODO: Fetch markers from backend.
+    const { data } = await axios.get('/api/comments');
+    this.setState({ markers: data });
+    console.log(data);
   }
   closeModal() {
     this.setState({ open: false, x: null, y: null });
   }
-  handleClick = (x, y, comment) => {
+  handleClick = (x, y) => {
     this.setState({ open: true, x, y });
-    // let newMarker = {
-    //   x,
-    //   y,
-    //   pageNumber: this.state.pageNumber,
-    //   comments: []
-    // };
-    // let key = `${x}${y}`;
-    // console.log(this.state.markers);
-    // this.setState(prevState => {
-    //   return {
-    //     markers: { ...prevState.markers, [key]: newMarker },
-    //     open: true
-    //   };
-    // });
   };
 
   onDocumentLoadSuccess = ({ numPages }) => {
@@ -82,21 +80,29 @@ export default class UserDocument extends Component {
         {markersArr.map(marker => {
           const { x, y, pageNumber } = marker;
 
-          return this.state.pageNumber === pageNumber ? (
-            <Comment
-              key={`${x}${y}`}
-              style={{
-                width: "1%",
-                height: "auto",
-                position: "absolute",
-                color: "red",
-                top: y - 15 + "px",
-                left: x + "px",
-                zIndex: 1
-              }}
-            ></Comment>
-          ) : (
-            <></>
+          return (
+            this.state.pageNumber === pageNumber && (
+              <Popup
+                trigger={
+                  <Comment
+                    key={`${x}${y}`}
+                    style={{
+                      width: '1%',
+                      height: 'auto',
+                      position: 'absolute',
+                      color: 'red',
+                      top: y - 15 + 'px',
+                      left: x + 'px',
+                      zIndex: 1
+                    }}
+                  />
+                }
+              >
+                <Popup.Content>
+                  <CommentComponent {...marker} />
+                </Popup.Content>
+              </Popup>
+            )
           );
         })}
         <nav>
@@ -122,7 +128,7 @@ export default class UserDocument extends Component {
         </p>
         <AddCommentForm
           open={this.state.open}
-          setComment={this.setComment}
+          submitComment={this.submitComment}
           closeModal={this.closeModal}
         />
       </div>

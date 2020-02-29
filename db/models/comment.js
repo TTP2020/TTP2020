@@ -1,7 +1,7 @@
-const Sequelize = require("sequelize");
-const db = require("../index");
+const Sequelize = require('sequelize');
+const db = require('../index');
 
-const Comment = db.define("comment", {
+const Comment = db.define('comment', {
   comment: {
     type: Sequelize.STRING,
     allowNull: false
@@ -17,9 +17,13 @@ const Comment = db.define("comment", {
   color: {
     type: Sequelize.STRING,
     allowNull: false,
-    defaultValue: "white"
+    defaultValue: 'white'
   },
   documentId: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  },
+  pageNumber: {
     type: Sequelize.INTEGER,
     allowNull: false
   }
