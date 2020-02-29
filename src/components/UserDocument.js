@@ -120,6 +120,8 @@ export default class UserDocument extends Component {
           open={this.state.open}
           setComment={this.setComment}
           closeModal={this.closeModal}
+          x={this.state.x}
+          y={this.state.y}
         />
       </div>
     );
