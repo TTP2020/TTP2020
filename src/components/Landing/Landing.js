@@ -24,8 +24,8 @@ export default class Landing extends Component {
           Pending Resumes
         </Header>
         <div className="landing-documents">
-          {documents.map(document => {
-            return <MockDocument></MockDocument>;
+          {documents.map((document, index) => {
+            return <MockDocument key={index} />;
           })}
         </div>
       </div>
