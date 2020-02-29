@@ -1,9 +1,15 @@
-import React, { Component } from "react";
-import { Image } from "semantic-ui-react";
-import { Link } from "react-router-dom";
-import MockDocument from "../MockDocument/MockDocument";
-import "./Landing.css";
+import React, { Component } from 'react';
+import { Image, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import MockDocument from '../MockDocument/MockDocument';
+import './Landing.css';
 
+const filters = [
+  ['All', ''],
+  ['Resumes', 'resume'],
+  ['Cover Letter', 'coverLetter'],
+  ['Messages', 'outreach'],
+];
 
 export default class Landing extends Component {
   constructor() {
@@ -32,37 +38,53 @@ export default class Landing extends Component {
           type: 'outreach',
         },
       ],
+      filter: '',
     };
   }
 
-  componentDidMount() { }
+  filter = type => {
+    this.setState({ filter: type });
+  };
 
   render() {
-    const { documents } = this.state;
+    const { documents, filter } = this.state;
     return (
       <div className="landing">
         <div>
           <Image src="./logo.png" size="huge"></Image>
         </div>
         <div>
-          <h2 as="h2" style={{ color: "white" }}>
-            Pending Resumes
-        </h2>
-        </div>
-        <div className="landing-documents">
-          {documents.map(document => {
+          {filters.map(filter => {
             return (
-              <Link
-                to={{
-                  pathname: '/resume',
-                  state: {
-                    fileName: document.fileName,
-                  },
+              <Button
+                key={filter[1]}
+                color={'youtube'}
+                onClick={() => {
+                  this.filter(filter[1]);
                 }}
               >
-                <MockDocument title={document.title}></MockDocument>
-              </Link>
+                {filter[0]}
+              </Button>
             );
+          })}
+        </div>
+        <div className="landing-documents">
+          {documents.map((document, index) => {
+            if (filter.length === 0 || document.type === filter) {
+              return (
+                <Link
+                  key={index}
+                  to={{
+                    pathname: '/resume',
+                    state: {
+                      fileName: document.fileName,
+                    },
+                  }}
+                >
+                  <MockDocument title={document.title}></MockDocument>
+                </Link>
+              );
+            }
           })}
         </div>
       </div>

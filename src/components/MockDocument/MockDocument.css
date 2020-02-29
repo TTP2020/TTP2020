@@ -1,11 +1,10 @@
 .mockdocument {
-  background: lightslategrey;
-  width: 400px;
-  height: 200px;
-  margin: 10px;
-  margin-left: 20px;
-  color: white;
-  border-radius: 5px;
+  width: 25rem;
+  height: 12.5rem;
+  margin: 0.7rem;
+  margin-left: 1.25rem;
+  color: orangered;
+  border-radius: 0.3rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,4 +12,8 @@
 
 .mockdocument-title {
   margin: 10px;
+}
+
+.mockdocument:hover {
+  background: orange;
 }
