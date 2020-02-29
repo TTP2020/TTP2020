@@ -10,7 +10,6 @@ export default class UploadResume extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     const resume = this.fileInput.current.files[0];
-    console.log("RESUME ", resume);
     let formData = new FormData();
     formData.append("file", resume);
     const config = {
@@ -19,7 +18,7 @@ export default class UploadResume extends Component {
       }
     };
     await axios.post("/api/resume", formData, config);
-
+    this.props.loadDocuments();
     console.log("after axios");
   }
 

@@ -1,5 +1,6 @@
 import React from "react";
-import { Comment } from "semantic-ui-react";
+import { Comment, Form, Button, Accordion } from "semantic-ui-react";
+import AddCommentForm from "./AddCommentForm";
 // import SingleComment from './SingleComment';
 
 // const dummyProps = [
@@ -8,17 +9,22 @@ import { Comment } from "semantic-ui-react";
 // ];
 
 const CommentComponent = props => {
+  const { x, y, color } = props.comments[0];
   return (
     <Comment.Group>
-      <Comment>
-        <Comment.Content>
-          <Comment.Author>Alex</Comment.Author>
-          <Comment.Text>{props.comment}</Comment.Text>
-        </Comment.Content>
-      </Comment>
-      {/*dummyProps.map((comment, index) => (
-        <SingleComment comment={comment} index={index} key={index} />
-      ))*/}
+      {props.comments.map(comment => (
+        <Comment>
+          <Comment.Content>
+            <Comment.Author>Anonymouse</Comment.Author>
+            <Comment.Text>{comment.comment}</Comment.Text>
+          </Comment.Content>
+        </Comment>
+      ))}
+
+      <Form onSubmit={e => props.submitComment(e, color, x, y)}>
+        <Form.TextArea name="comment" />
+        <Button type="submit">Submit</Button>
+      </Form>
     </Comment.Group>
   );
 };

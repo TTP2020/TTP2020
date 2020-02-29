@@ -2,9 +2,17 @@ const Sequelize = require("sequelize");
 const db = require("../index");
 
 const Resume = db.define("resume", {
-  file: {
-    type: Sequelize.BLOB,
+  fileName: {
+    type: Sequelize.STRING,
     allowNullL: false
+  },
+  title: {
+    type: Sequelize.STRING,
+    defaultValue: "Software Engineer"
+  },
+  type: {
+    type: Sequelize.STRING,
+    defaultValue: "resume"
   }
 });
 

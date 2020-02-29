@@ -46,8 +46,17 @@ router.get("/", async (req, res, next) => {
 //   }
 // });
 
-router.post("/", upload.single("file"), function(req, res) {
-  // debug(req.file);
-  console.log("storage location is ", req.hostname + "/" + req.file.path);
-  return res.send(req.file);
+router.post("/", upload.single("file"), async (req, res) => {
+  try {
+    console.log("storage location is ", req.hostname + "/" + req.file.path);
+    console.log("FILENAME ", req.file.filename);
+    await Resume.create({
+      fileName: req.file.filename,
+      title: req.body.title,
+      type: req.body.type
+    });
+    return res.send(req.file);
+  } catch (error) {
+    console.log(error);
+  }
 });
