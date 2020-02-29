@@ -2,6 +2,9 @@
   {
     "id": 1,
     "documentId": 1,
-    "comment": "looking too ugly"
+    "comment": "looking too ugly",
+    "color": "green",
+    "x": 10,
+    "y": 20
   }
 ]

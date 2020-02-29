@@ -13,7 +13,10 @@ async function seed() {
       return Comment.create({
         id: comment.id,
         documentId: comment.documentId,
-        comment: comment.comment
+        comment: comment.comment,
+        x: comment.x,
+        y: comment.y,
+        color: comment.color
       });
     })
   );
