@@ -7,13 +7,11 @@ export default class Landing extends Component {
   constructor() {
     super();
     this.state = {
-      documents: [{}, {}, {}, {}, {}]
-    }
+      documents: [{}, {}, {}, {}, {}],
+    };
   }
 
-  componentDidMount() {
-
-  }
+  componentDidMount() { }
 
   render() {
     const { documents } = this.state;
@@ -25,6 +23,7 @@ export default class Landing extends Component {
           return <MockDocument></MockDocument>
         })}
       </div>
-    </div>)
+    </div>
+    );
   }
 }

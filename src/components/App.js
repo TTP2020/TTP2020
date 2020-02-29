@@ -20,10 +20,11 @@ export default class App extends Component {
 
   render() {
     return (
-      <div class="App">
-        <Link to="/">Landing</Link>
+      <div className="App">
         <Link to="/add">Add</Link>
         <Link to="/resume">Resume</Link>
+        <Link to="/comments">Comments</Link>
+        <Link to="/">Landing</Link>
         <Routes />
       </div>
     );

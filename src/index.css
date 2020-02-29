@@ -22,3 +22,23 @@ code {
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.commentColorWhite {
+  color: white !important;
+}
+
+.commentColorBlue {
+  color: #61dafb !important;
+}
+
+.commentColorFill {
+  fill: red !important;
+}
+
+.dot {
+  height: 25px !important;
+  width: 25px !important;
+  border-radius: 50% !important;
+  display: inline-block !important;
+  background-color: green !important;
+}

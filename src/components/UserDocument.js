@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Page } from 'react-pdf';
 import { Document } from 'react-pdf/dist/entry.webpack';
 import { ReactComponent as Comment } from '../assets/comment.svg';
-
+import { Button, Popup, Modal, Form } from 'semantic-ui-react';
+import AddCommentForm from './AddCommentForm';
 export default class UserDocument extends Component {
   constructor() {
     super();
@@ -10,27 +11,52 @@ export default class UserDocument extends Component {
       numPages: null,
       pageNumber: 1,
       markers: {},
+      open: false,
+      x: null,
+      y: null
     };
+    this.setComment = this.setComment.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
-
-  componentDidMount() {
-    //TODO: Fetch markers from backend.
-  }
-
-  handleClick = (x, y, comment) => {
+  setComment() {
     let newMarker = {
-      x,
-      y,
+      x: this.state.x,
+      y: this.state.y,
       pageNumber: this.state.pageNumber,
-      comments: [],
+      comments: []
     };
-    let key = `${x}${y}`;
-    console.log(this.state.markers);
+    let key = `${this.state.x}${this.state.y}`;
     this.setState(prevState => {
       return {
         markers: { ...prevState.markers, [key]: newMarker },
+        x: null,
+        y: null,
+        open: false
       };
     });
+  }
+  componentDidMount() {
+    //TODO: Fetch markers from backend.
+  }
+  closeModal() {
+    this.setState({ open: false, x: null, y: null });
+  }
+  handleClick = (x, y, comment) => {
+    this.setState({ open: true, x, y });
+    // let newMarker = {
+    //   x,
+    //   y,
+    //   pageNumber: this.state.pageNumber,
+    //   comments: []
+    // };
+    // let key = `${x}${y}`;
+    // console.log(this.state.markers);
+    // this.setState(prevState => {
+    //   return {
+    //     markers: { ...prevState.markers, [key]: newMarker },
+    //     open: true
+    //   };
+    // });
   };
 
   onDocumentLoadSuccess = ({ numPages }) => {
@@ -66,16 +92,16 @@ export default class UserDocument extends Component {
                 color: 'red',
                 top: y - 15 + 'px',
                 left: x + 'px',
-                zIndex: 1,
+                zIndex: 1
               }}
             ></Comment>
           ) : (
-              <></>
-            );
+            <></>
+          );
         })}
         <nav>
-          <button onClick={this.goToPrevPage}>Prev</button>
-          <button onClick={this.goToNextPage}>Next</button>
+          <Button onClick={this.goToPrevPage}>Prev</Button>
+          <Button onClick={this.goToNextPage}>Next</Button>
           <p>
             Page {pageNumber} of {numPages}
           </p>
@@ -90,6 +116,11 @@ export default class UserDocument extends Component {
         <p>
           Page {pageNumber} of {numPages}
         </p>
+        <AddCommentForm
+          open={this.state.open}
+          setComment={this.setComment}
+          closeModal={this.closeModal}
+        />
       </div>
     );
   }
