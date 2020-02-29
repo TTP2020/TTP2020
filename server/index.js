@@ -1,8 +1,8 @@
-const express = require("express");
-const path = require("path");
+const express = require('express');
+const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 8080;
-const db = require("./db");
+const db = require('../db');
 
 module.exports = app;
 
@@ -11,21 +11,21 @@ const createApp = () => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
-  app.use("/api", require("./api"));
+  app.use('/api', require('./api'));
 
   // static file-serving middleware
-  app.use(express.static(path.join(__dirname, "..", "public")));
+  app.use(express.static(path.join(__dirname, '..', 'public')));
 
   // sends index.html
-  app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "public/index.html"));
+  app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public/index.html'));
   });
 
   // Error catching endware
   app.use((err, req, res, next) => {
     console.error(err, typeof next);
     console.error(err.stack);
-    res.status(err.status || 500).send(err.message || "Internal server error.");
+    res.status(err.status || 500).send(err.message || 'Internal server error.');
   });
 };
 
