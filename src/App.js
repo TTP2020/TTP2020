@@ -30,7 +30,7 @@ export default class App extends Component {
   render() {
     const { pageNumber, numPages, markers } = this.state;
     return (
-      <div>
+      <div className="App">
         {markers.map(marker => {
           console.log('rendered');
           return (
