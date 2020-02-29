@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UserDocument from './components/UserDocument'
+import Landing from './components/Landing'
 
 export default class App extends Component {
   constructor() {
@@ -16,8 +16,8 @@ export default class App extends Component {
   }
 
   render() {
-    return <div class="App">
-      <UserDocument></UserDocument>
+    return <div className="App">
+      <Landing></Landing>
     </div>
   }
 }
