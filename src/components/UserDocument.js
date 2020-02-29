@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import { Page } from 'react-pdf';
-import { Document } from 'react-pdf/dist/entry.webpack';
-import { ReactComponent as Comment } from '../assets/comment.svg';
-import { Button, Popup, Modal, Form } from 'semantic-ui-react';
-import CommentComponent from './Comments';
-import AddCommentForm from './AddCommentForm';
-import CommentList from './CommentList';
-import axios from 'axios';
+import React, { Component } from "react";
+import { Page } from "react-pdf";
+import { Document } from "react-pdf/dist/entry.webpack";
+import { ReactComponent as Comment } from "../assets/comment.svg";
+import { Button, Popup, Modal, Form } from "semantic-ui-react";
+import CommentComponent from "./Comments";
+import AddCommentForm from "./AddCommentForm";
+import CommentList from "./CommentList";
+import axios from "axios";
 const colors = [
-  'red',
-  'orange',
-  'yellow',
-  'blue',
-  'green',
-  'pink',
-  'purple',
-  'teal'
+  "red",
+  "orange",
+  "yellow",
+  "blue",
+  "green",
+  "pink",
+  "purple",
+  "teal"
 ];
 export default class UserDocument extends Component {
   constructor() {
@@ -48,7 +48,7 @@ export default class UserDocument extends Component {
       y: newY,
       pageNumber: this.state.pageNumber
     };
-    await axios.post('/api/comments', newComment);
+    await axios.post("/api/comments", newComment);
     let key = `${newX},${newY}`;
     let updatedComments;
     if (this.state.markers[key]) {
@@ -67,7 +67,7 @@ export default class UserDocument extends Component {
 
   async componentDidMount() {
     //TODO: Fetch markers from backend.
-    const { data } = await axios.get('/api/comments');
+    const { data } = await axios.get("/api/comments");
     let newMarkers = {};
     for (let i = 0; i < data.length; i++) {
       const curr = data[i];
@@ -111,12 +111,12 @@ export default class UserDocument extends Component {
             <Comment
               key
               style={{
-                width: '1%',
-                height: 'auto',
-                position: 'absolute',
+                width: "1%",
+                height: "auto",
+                position: "absolute",
                 fill: `${color}`,
-                top: y - 15 + 'px',
-                left: x + 'px',
+                top: y - 15 + "px",
+                left: x + "px",
                 zIndex: 1
               }}
             />
@@ -136,7 +136,6 @@ export default class UserDocument extends Component {
   }
   render() {
     const { pageNumber, numPages, markers } = this.state;
-
     return (
       <div className="App">
         {this.createComments()}

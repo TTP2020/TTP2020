@@ -1,6 +1,6 @@
-import React from 'react';
-import { Comment, Form, Button, Accordion } from 'semantic-ui-react';
-import AddCommentForm from './AddCommentForm';
+import React from "react";
+import { Comment, Form, Button, Accordion } from "semantic-ui-react";
+import AddCommentForm from "./AddCommentForm";
 // import SingleComment from './SingleComment';
 
 // const dummyProps = [

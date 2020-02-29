@@ -10,18 +10,24 @@ export default class UploadResume extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     const resume = this.fileInput.current.files[0];
-    // console.log("RESUME ", this.fileInput.current.files[0]);
-
     let formData = new FormData();
-    formData.append("resume", resume);
-    await axios.post("/api/resume", formData);
-
+    formData.append("file", resume);
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data"
+      }
+    };
+    await axios.post("/api/resume", formData, config);
+    this.props.loadDocuments();
     console.log("after axios");
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form
+        style={{ display: "flex", margin: "1em" }}
+        onSubmit={this.handleSubmit}
+      >
         <label>
           Upload file:
           <input type="file" ref={this.fileInput} />
