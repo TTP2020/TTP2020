@@ -6,6 +6,7 @@ export default class App extends Component {
   state = {
     numPages: null,
     pageNumber: 1,
+    markers: []
   }
 
   onDocumentLoadSuccess = ({ numPages }) => {
@@ -17,6 +18,7 @@ export default class App extends Component {
     return (
       <div>
         <Document
+          onClick={(event) => console.log(event.pageX, event.pageY)}
           file="./example.pdf"
           onLoadSuccess={this.onDocumentLoadSuccess}
         >
