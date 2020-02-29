@@ -1,0 +1,13 @@
+.landing {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-documents {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
