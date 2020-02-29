@@ -21,9 +21,9 @@ export default class App extends Component {
   render() {
     return (
       <div class="App">
+        <Link to="/">Landing</Link>
         <Link to="/add">Add</Link>
         <Link to="/resume">Resume</Link>
-
         <Routes />
       </div>
     );
