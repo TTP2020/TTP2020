@@ -23,6 +23,7 @@ export default class App extends Component {
       <div class="App">
         <Link to="/add">Add</Link>
         <Link to="/resume">Resume</Link>
+        <Link to="/comments">Comments</Link>
 
         <Routes />
       </div>
