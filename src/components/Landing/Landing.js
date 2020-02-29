@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Header, Container } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import MockDocument from "../MockDocument/MockDocument";
+import UploadResume from "../UploadResume";
 import "./Landing.css";
 
 export default class Landing extends Component {
@@ -38,6 +39,7 @@ export default class Landing extends Component {
         <Header as="h2" style={{ color: "white" }}>
           Pending Resumes
         </Header>
+        <UploadResume />
         <div className="landing-documents">
           {documents.map(document => {
             return (

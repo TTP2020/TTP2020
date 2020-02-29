@@ -1,5 +1,5 @@
-import React from 'react';
-import { Comment } from 'semantic-ui-react';
+import React from "react";
+import { Comment } from "semantic-ui-react";
 // import SingleComment from './SingleComment';
 
 // const dummyProps = [

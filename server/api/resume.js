@@ -1,9 +1,29 @@
-const router = require('express').Router();
-// const fileUpload = require("express-fileupload");
-const Resume = require('../../db/models/resume');
+const router = require("express").Router();
+const fileUpload = require("express-fileupload");
+const Resume = require("../../db/models/resume");
+const multer = require("multer");
+const path = require("path");
+
 module.exports = router;
 
-router.get('/', async (req, res, next) => {
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./public");
+  },
+  filename: (req, file, cb) => {
+    cb(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  }
+});
+
+console.log("STORAGE ", storage);
+
+//will be using this for uplading
+const upload = multer({ storage: storage });
+
+router.get("/", async (req, res, next) => {
   try {
     const resume = await Resume.findAll();
     res.json(resume);
@@ -25,3 +45,9 @@ router.get('/', async (req, res, next) => {
 //     next(error);
 //   }
 // });
+
+router.post("/", upload.single("file"), function(req, res) {
+  // debug(req.file);
+  console.log("storage location is ", req.hostname + "/" + req.file.path);
+  return res.send(req.file);
+});
