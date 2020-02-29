@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Header, Container } from 'semantic-ui-react';
 import MockDocument from '../MockDocument/MockDocument';
-import './Landing.css';
+import './Landing.css'
 
 export default class Landing extends Component {
   constructor() {
@@ -11,24 +11,19 @@ export default class Landing extends Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
   render() {
     const { documents } = this.state;
-    return (
-      <div className="landing">
-        <Header as="h1" style={{ color: 'white' }}>
-          Welcome to Kritique
-        </Header>
-        <Header as="h2" style={{ color: 'white' }}>
-          Pending Resumes
-        </Header>
-        <div className="landing-documents">
-          {documents.map((document, index) => {
-            return <MockDocument key={index} />;
-          })}
-        </div>
+    return (<div className="landing">
+      <Header as="h1" style={{ color: "white", "font-family": 'Montserrat', "font-weight": 800, "font-size": "150px" }}>Welcome to Kritique</Header>
+      <Header as="h2" style={{ color: "white" }}>Pending Resumes</Header>
+      <div className="landing-documents">
+        {documents.map(document => {
+          return <MockDocument></MockDocument>
+        })}
       </div>
+    </div>
     );
   }
 }
