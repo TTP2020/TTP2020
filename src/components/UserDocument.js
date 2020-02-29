@@ -6,6 +6,7 @@ import { Button, Popup, Modal, Form } from 'semantic-ui-react';
 import CommentComponent from './Comments';
 import AddCommentForm from './AddCommentForm';
 import axios from 'axios';
+
 export default class UserDocument extends Component {
   constructor() {
     super();
@@ -105,15 +106,19 @@ export default class UserDocument extends Component {
           );
         })}
         <nav>
-          <Button onClick={this.goToPrevPage}>Prev</Button>
-          <Button onClick={this.goToNextPage}>Next</Button>
+          {this.state.numPages > 1 ? (
+            <div>
+              <Button onClick={this.goToPrevPage}>Prev</Button>
+              <Button onClick={this.goToNextPage}>Next</Button>
+            </div>
+          ) : null}
           <p>
             Page {pageNumber} of {numPages}
           </p>
         </nav>
         <Document
           onClick={event => this.handleClick(event.pageX, event.pageY)}
-          file="./example.pdf"
+          file={`./${this.props.location.state.fileName}`}
           onLoadSuccess={this.onDocumentLoadSuccess}
         >
           <Page pageNumber={pageNumber}></Page>
