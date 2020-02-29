@@ -7,7 +7,7 @@ import './Landing.css';
 const filters = [
   ['All', ''],
   ['Resumes', 'resume'],
-  ['Cover Letter', 'coverLetter'],
+  ['Cover Letters', 'coverLetter'],
   ['Messages', 'outreach'],
 ];
 
