@@ -1,8 +1,8 @@
-const router = require("express").Router();
-const Comment = require("../../db/models/comment");
+const router = require('express').Router();
+const Comment = require('../../db/models/comment');
 module.exports = router;
 
-router.get("/", async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const comments = await Comment.findAll({
       where: {
@@ -15,15 +15,16 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
-    console.log("REQ BODy, ", req.body);
+    console.log('REQ BODy, ', req.body);
     const newComment = await Comment.create({
       documentId: req.body.documentId,
       comment: req.body.comment,
       y: req.body.y,
       x: req.body.x,
-      color: req.body.color
+      color: req.body.color,
+      pageNumber: req.body.pageNumber
     });
 
     res.status(201).json(newComment);
