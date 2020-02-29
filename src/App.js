@@ -17,14 +17,17 @@ export default class App extends Component {
     //TODO: Fetch markers from backend.
   }
 
-  handleClick = (x, y) => {
+  handleClick = (x, y, comment) => {
     let newMarker = {
-      x, y, pageNumber: this.state.pageNumber
+      x, y, pageNumber: this.state.pageNumber, comments: []
     }
-    let newArr = this.state.markers.concat(newMarker)
-    console.log(this.state)
-    this.setState(
-      { markers: newArr }
+    let key = `${x}${y}`;
+    console.log(this.state.markers)
+    this.setState((prevState) => {
+      return {
+        markers: { ...prevState.markers, [key]: newMarker }
+      }
+    }
     )
   }
 
@@ -45,12 +48,13 @@ export default class App extends Component {
 
   render() {
     const { pageNumber, numPages, markers } = this.state;
+    const markersArr = Object.values(markers)
     return (
       <div>
-        {markers.map(marker => {
+        {markersArr.map(marker => {
           const { x, y, pageNumber } = marker
 
-          return this.state.pageNumber === pageNumber ? <Comment style={{
+          return this.state.pageNumber === pageNumber ? <Comment key={`${x}${y}`} style={{
             width: "1%",
             height: "auto",
             position: "absolute",
