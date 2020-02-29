@@ -30,13 +30,25 @@ export default class App extends Component {
 
   onDocumentLoadSuccess = ({ numPages }) => {
     this.setState({ numPages });
-  }
+  };
+
+  goToPrevPage = () => {
+    const { pageNumber } = this.state;
+    if (pageNumber - 1 > 0) this.setState({ pageNumber: pageNumber - 1 });
+  };
+
+  goToNextPage = () => {
+    const { pageNumber, numPages } = this.state;
+    if (pageNumber + 1 <= numPages)
+      this.setState({ pageNumber: pageNumber + 1 });
+  };
 
   render() {
     const { pageNumber, numPages, markers } = this.state;
     return (
       <div>
         {markers.map(marker => {
+<<<<<<< HEAD
           const { x, y } = marker
           return <Comment style={{
             width: "1%",
@@ -53,14 +65,47 @@ export default class App extends Component {
         }
         <Document
           onClick={(event) => this.handleClick(event.pageX, event.pageY)}
+=======
+          console.log('rendered');
+          return (
+            <div
+              style={{
+                position: 'absolute',
+
+                color: 'red',
+                top: 100 + 'px',
+                left: 100 + 'px',
+                zIndex: 1,
+              }}
+            >
+              ♥
+            </div>
+          );
+        })}
+        <nav>
+          <button onClick={this.goToPrevPage}>Prev</button>
+          <button onClick={this.goToNextPage}>Next</button>
+          <p>
+            Page {pageNumber} of {numPages}
+          </p>
+        </nav>
+
+        <Document
+          onClick={event => console.log(event.pageX, event.pageY)}
+>>>>>>> master
           file="./example.pdf"
           onLoadSuccess={this.onDocumentLoadSuccess}
         >
-          <Page pageNumber={1}>
-          </Page>
+          <Page pageNumber={pageNumber}></Page>
         </Document>
-        <p>Page {pageNumber} of {numPages}</p>
+<<<<<<< HEAD
+    <p>Page {pageNumber} of {numPages}</p>
       </div >
+=======
+
+        <AddCommentForm />
+      </div>
+>>>>>>> master
     );
   }
 }
