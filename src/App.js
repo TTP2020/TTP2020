@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Page } from 'react-pdf';
 import { Document } from 'react-pdf/dist/entry.webpack';
-import { ReactComponent as Comment } from './assets/comment.svg'
+import { ReactComponent as Comment } from './assets/comment.svg';
 
 export default class App extends Component {
   constructor() {
@@ -9,7 +9,7 @@ export default class App extends Component {
     this.state = {
       numPages: null,
       pageNumber: 1,
-      markers: []
+      markers: {}
     }
   }
 
@@ -19,7 +19,7 @@ export default class App extends Component {
 
   handleClick = (x, y) => {
     let newMarker = {
-      x, y,
+      x, y, pageNumber: this.state.pageNumber
     }
     let newArr = this.state.markers.concat(newMarker)
     console.log(this.state)
@@ -48,9 +48,9 @@ export default class App extends Component {
     return (
       <div>
         {markers.map(marker => {
-<<<<<<< HEAD
-          const { x, y } = marker
-          return <Comment style={{
+          const { x, y, pageNumber } = marker
+
+          return this.state.pageNumber === pageNumber ? <Comment style={{
             width: "1%",
             height: "auto",
             position: "absolute",
@@ -60,28 +60,9 @@ export default class App extends Component {
             zIndex: 1
           }}>
 
-          </Comment>
+          </Comment> : <></>
         })
         }
-        <Document
-          onClick={(event) => this.handleClick(event.pageX, event.pageY)}
-=======
-          console.log('rendered');
-          return (
-            <div
-              style={{
-                position: 'absolute',
-
-                color: 'red',
-                top: 100 + 'px',
-                left: 100 + 'px',
-                zIndex: 1,
-              }}
-            >
-              ♥
-            </div>
-          );
-        })}
         <nav>
           <button onClick={this.goToPrevPage}>Prev</button>
           <button onClick={this.goToNextPage}>Next</button>
@@ -89,23 +70,15 @@ export default class App extends Component {
             Page {pageNumber} of {numPages}
           </p>
         </nav>
-
         <Document
-          onClick={event => console.log(event.pageX, event.pageY)}
->>>>>>> master
+          onClick={(event) => this.handleClick(event.pageX, event.pageY)}
           file="./example.pdf"
           onLoadSuccess={this.onDocumentLoadSuccess}
         >
           <Page pageNumber={pageNumber}></Page>
         </Document>
-<<<<<<< HEAD
-    <p>Page {pageNumber} of {numPages}</p>
-      </div >
-=======
-
-        <AddCommentForm />
+        <p>Page {pageNumber} of {numPages}</p>
       </div>
->>>>>>> master
     );
   }
 }
