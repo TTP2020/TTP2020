@@ -3,10 +3,28 @@ import { Document, Page, pdfjs } from 'react-pdf';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 export default class App extends Component {
-  state = {
-    numPages: null,
-    pageNumber: 1,
-    markers: [{}]
+  constructor() {
+    super()
+    this.state = {
+      numPages: null,
+      pageNumber: 1,
+      markers: []
+    }
+  }
+
+  componentDidMount() {
+    //TODO: Fetch markers from backend.
+  }
+
+  handleClick = (x, y) => {
+    let newMarker = {
+      x, y,
+    }
+    let newArr = this.state.markers.concat(newMarker)
+    console.log(this.state)
+    this.setState(
+      { markers: newArr }
+    )
   }
 
   onDocumentLoadSuccess = ({ numPages }) => {
@@ -18,13 +36,12 @@ export default class App extends Component {
     return (
       <div>
         {markers.map(marker => {
-          console.log('rendered')
+          const { x, y } = marker
           return <div style={{
             position: "absolute",
-
             color: "red",
-            top: 100 + 'px',
-            left: 100 + 'px',
+            top: y + 'px',
+            left: x + 'px',
             zIndex: 1
           }}>
             ♥
@@ -32,7 +49,7 @@ export default class App extends Component {
         })
         }
         <Document
-          onClick={(event) => console.log(event.pageX, event.pageY)}
+          onClick={(event) => this.handleClick(event.pageX, event.pageY)}
           file="./example.pdf"
           onLoadSuccess={this.onDocumentLoadSuccess}
         >
@@ -40,7 +57,6 @@ export default class App extends Component {
           </Page>
         </Document>
         <p>Page {pageNumber} of {numPages}</p>
-        <h1>This is an example</h1>
       </div >
     );
   }
