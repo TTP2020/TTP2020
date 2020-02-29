@@ -1,20 +1,20 @@
-import React from 'react';
-import { Image } from 'semantic-ui-react';
-import './MockDocument.css';
+import React from "react";
+import { Image } from "semantic-ui-react";
+import "./MockDocument.css";
 
-const MockDocument = (props) => {
+const MockDocument = props => {
   return (
     <div className="mockdocument">
       <Image
         src="./mockdocument.png"
-        as='a'
-        size='small'
-        href='http://google.com'
-        target='_blank'
+        as="a"
+        size="small"
+        href="http://google.com"
+        target="_blank"
       />
-      <p className="mockdocument-title">This is the title</p>
+      <p className="mockdocument-title">{props.title}</p>
     </div>
-  )
-}
+  );
+};
 
 export default MockDocument;
