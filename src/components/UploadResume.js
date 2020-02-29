@@ -24,7 +24,10 @@ export default class UploadResume extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form
+        style={{ display: "flex", margin: "1em" }}
+        onSubmit={this.handleSubmit}
+      >
         <label>
           Upload file:
           <input type="file" ref={this.fileInput} />

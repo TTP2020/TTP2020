@@ -6,7 +6,7 @@ export default class SingleComment extends Component {
     index: this.props.index,
     name: this.props.comment.name,
     text: this.props.comment.text,
-    score: this.props.comment.score,
+    score: this.props.score
   };
 
   changeScore = num => {
@@ -18,32 +18,44 @@ export default class SingleComment extends Component {
 
     console.log(this.state);
     return (
-      <Comment key={index}>
-        <Comment.Avatar className="dot" />
+      <Comment.Group>
+        <Comment key={index}>
+          <Comment.Avatar
+            as={Icon}
+            name="user"
+            color={this.props.comment.color}
+          >
+            <Icon name="user" />
+          </Comment.Avatar>
 
-        <Comment.Content>
-          <Comment.Author className="commentColorWhite">{name}</Comment.Author>
-          <Comment.Text className="commentColorWhite">{text}</Comment.Text>
-          <Comment.Actions>
-            <Comment.Action className="commentColorBlue">
-              {score} <Icon name="star" color="yellow" />
-            </Comment.Action>
+          <Comment.Content>
+            <Comment.Author className="commentColorWhite">
+              Anonymouse
+            </Comment.Author>
+            <Comment.Text className="commentColorWhite">
+              {this.props.comment.comment}
+            </Comment.Text>
+            <Comment.Actions>
+              <Comment.Action className="commentColorBlue">
+                {score} <Icon name="star" color="yellow" />
+              </Comment.Action>
 
-            <Comment.Action className="commentColorBlue">
-              <Icon
-                name="arrow alternate circle down outline"
-                onClick={() => this.changeScore(-1)}
-              />
-            </Comment.Action>
-            <Comment.Action className="commentColorBlue">
-              <Icon
-                name="arrow alternate circle up outline"
-                onClick={() => this.changeScore(1)}
-              />
-            </Comment.Action>
-          </Comment.Actions>
-        </Comment.Content>
-      </Comment>
+              <Comment.Action className="commentColorBlue">
+                <Icon
+                  name="arrow alternate circle down outline"
+                  onClick={() => this.changeScore(-1)}
+                />
+              </Comment.Action>
+              <Comment.Action className="commentColorBlue">
+                <Icon
+                  name="arrow alternate circle up outline"
+                  onClick={() => this.changeScore(1)}
+                />
+              </Comment.Action>
+            </Comment.Actions>
+          </Comment.Content>
+        </Comment>
+      </Comment.Group>
     );
   }
 }
