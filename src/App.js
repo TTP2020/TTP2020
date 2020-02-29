@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Document, Page, pdfjs } from 'react-pdf';
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+import { Page } from 'react-pdf';
+import { Document } from 'react-pdf/dist/entry.webpack';
 
 export default class App extends Component {
   constructor() {
