@@ -5,12 +5,12 @@ import { ReactComponent as Comment } from './assets/comment.svg';
 
 export default class App extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
       numPages: null,
       pageNumber: 1,
-      markers: {}
-    }
+      markers: {},
+    };
   }
 
   componentDidMount() {
@@ -19,17 +19,19 @@ export default class App extends Component {
 
   handleClick = (x, y, comment) => {
     let newMarker = {
-      x, y, pageNumber: this.state.pageNumber, comments: []
-    }
+      x,
+      y,
+      pageNumber: this.state.pageNumber,
+      comments: [],
+    };
     let key = `${x}${y}`;
-    console.log(this.state.markers)
-    this.setState((prevState) => {
+    console.log(this.state.markers);
+    this.setState(prevState => {
       return {
-        markers: { ...prevState.markers, [key]: newMarker }
-      }
-    }
-    )
-  }
+        markers: { ...prevState.markers, [key]: newMarker },
+      };
+    });
+  };
 
   onDocumentLoadSuccess = ({ numPages }) => {
     this.setState({ numPages });
@@ -48,33 +50,29 @@ export default class App extends Component {
 
   render() {
     const { pageNumber, numPages, markers } = this.state;
-    const markersArr = Object.values(markers)
+    const markersArr = Object.values(markers);
     return (
-      {/*
-<div className="App">
-      {markersArr.map(marker => {
-          const { x, y, pageNumber } = marker
-
-          return this.state.pageNumber === pageNumber ? <Comment key={`${x}${y}`} style={{
-            width: "1%",
-            height: "auto",
-            position: "absolute",
-            color: "red",
-            top: y - 15 + 'px',
-            left: x + 'px',
-            zIndex: 1
-          }}>
       <div className="App">
-        {markers.map(marker => {
-          console.log('rendered');
-          return (
-            <div
-              style={{
-                position: 'absolute',
+        {markersArr.map(marker => {
+          const { x, y, pageNumber } = marker;
 
-          </Comment> : <></>
-        })
-        }
+          return this.state.pageNumber === pageNumber ? (
+            <Comment
+              key={`${x}${y}`}
+              style={{
+                width: '1%',
+                height: 'auto',
+                position: 'absolute',
+                color: 'red',
+                top: y - 15 + 'px',
+                left: x + 'px',
+                zIndex: 1,
+              }}
+            ></Comment>
+          ) : (
+            <></>
+          );
+        })}
         <nav>
           <button onClick={this.goToPrevPage}>Prev</button>
           <button onClick={this.goToNextPage}>Next</button>
@@ -83,15 +81,16 @@ export default class App extends Component {
           </p>
         </nav>
         <Document
-          onClick={(event) => this.handleClick(event.pageX, event.pageY)}
+          onClick={event => this.handleClick(event.pageX, event.pageY)}
           file="./example.pdf"
           onLoadSuccess={this.onDocumentLoadSuccess}
         >
           <Page pageNumber={pageNumber}></Page>
         </Document>
-        <p>Page {pageNumber} of {numPages}</p>
+        <p>
+          Page {pageNumber} of {numPages}
+        </p>
       </div>
-*/}
     );
   }
 }
