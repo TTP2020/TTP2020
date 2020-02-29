@@ -50,8 +50,9 @@ export default class App extends Component {
     const { pageNumber, numPages, markers } = this.state;
     const markersArr = Object.values(markers)
     return (
-      <div>
-        {markersArr.map(marker => {
+      {/*
+<div className="App">
+      {markersArr.map(marker => {
           const { x, y, pageNumber } = marker
 
           return this.state.pageNumber === pageNumber ? <Comment key={`${x}${y}`} style={{
@@ -63,6 +64,13 @@ export default class App extends Component {
             left: x + 'px',
             zIndex: 1
           }}>
+      <div className="App">
+        {markers.map(marker => {
+          console.log('rendered');
+          return (
+            <div
+              style={{
+                position: 'absolute',
 
           </Comment> : <></>
         })
@@ -83,6 +91,7 @@ export default class App extends Component {
         </Document>
         <p>Page {pageNumber} of {numPages}</p>
       </div>
+*/}
     );
   }
 }
