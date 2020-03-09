@@ -6,7 +6,7 @@ export default class SingleComment extends Component {
     index: this.props.index,
     name: this.props.comment.name,
     text: this.props.comment.text,
-    score: this.props.score
+    score: this.props.score,
   };
 
   changeScore = num => {
@@ -30,7 +30,7 @@ export default class SingleComment extends Component {
 
           <Comment.Content>
             <Comment.Author className="commentColorWhite">
-              Anonymouse
+              Anonymous
             </Comment.Author>
             <Comment.Text className="commentColorWhite">
               {this.props.comment.comment}

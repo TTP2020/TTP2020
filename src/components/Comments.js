@@ -1,6 +1,6 @@
-import React from "react";
-import { Comment, Form, Button, Accordion } from "semantic-ui-react";
-import AddCommentForm from "./AddCommentForm";
+import React from 'react';
+import { Comment, Form, Button, Accordion } from 'semantic-ui-react';
+import AddCommentForm from './AddCommentForm';
 // import SingleComment from './SingleComment';
 
 // const dummyProps = [
@@ -15,7 +15,7 @@ const CommentComponent = props => {
       {props.comments.map(comment => (
         <Comment>
           <Comment.Content>
-            <Comment.Author>Anonymouse</Comment.Author>
+            <Comment.Author>Anonymous</Comment.Author>
             <Comment.Text>{comment.comment}</Comment.Text>
           </Comment.Content>
         </Comment>
